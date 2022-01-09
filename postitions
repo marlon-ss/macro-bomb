@@ -1,0 +1,20 @@
+unknown: 1290 x 665
+
+rgb 1220, 760 ((212, 212, 212)) botao trabalho clicado
+rgb 1220, 760 ((211, 212, 211)) botao trabalho não clicado
+
+botao fechar herois: 1350, 370
+
+primeiro botão home: 1330 x 440 rgb: (123, 114, 129)
+
+botao hunt: 1290 x 550
+
+botao new map: 1300 x 750 
+
+botao voltar mapa: 855 x 290
+
+botao rest 1270 x 440
+
+botao rest nao clicado (173, 84, 18)
+
+botao rest clicado (248, 121, 26)
