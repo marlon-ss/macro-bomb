@@ -15,20 +15,6 @@ def getPos():
     except KeyboardInterrupt:
         print('\n')
 
-def workClicked():
-    resp = False
-    if pyautogui.pixel(1220, 760) == (212, 212, 212):
-        resp = True
-    
-    return resp
-
-def restClicked():
-    resp = False
-    if pyautogui.pixel(1270, 440) == (248, 121, 26):
-        resp = True
-    
-    return resp
-
 def isWork():
     resp = False
     if pyautogui.locateOnScreen('./buttons/workAll.png', confidence=.7) != None:
@@ -66,7 +52,7 @@ def login(trabalho=True, minRestantes=81):
             cont = 0
             locateConnect = True
             logging.debug('achou o connect; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
-            pyautogui.moveTo('./buttons/connect.png', None, 0.7)
+            pyautogui.moveTo('./buttons/connect.png', None, 0.5)
             pyautogui.click()
         
         elif cont > 90:
@@ -80,7 +66,7 @@ def login(trabalho=True, minRestantes=81):
             cont = 0
             locateSign = True
             logging.debug('achou o sign da metamask; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
-            pyautogui.moveTo('./buttons/signMeta.png', None, 0.8)
+            pyautogui.moveTo('./buttons/signMeta.png', None, 0.5)
             pyautogui.click()
         
         elif cont > 60:
@@ -119,7 +105,7 @@ def putWork():
             locateHeroes = True
             cont = 0
             logging.debug('encontrou o botão herois; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
-            pyautogui.moveTo('./buttons/heroes.png', None, 0.6)
+            pyautogui.moveTo('./buttons/heroes.png', None, 0.5)
             pyautogui.click()
         elif cont > 60:
             logging.error('nao encontrou o botao herois em 1 min e vai recarregar; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
@@ -139,7 +125,7 @@ def putWork():
         logging.debug('encontrou o botão work All e colocara para trabalhar; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
         cont = 0
         time.sleep(1)
-        pyautogui.moveTo('./buttons/workAll.png', None, 0.6)
+        pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/workAll.png', confidence=.7), None, 0.5)
         pyautogui.click()
         rest = False
         while rest == False:
@@ -154,7 +140,7 @@ def putWork():
     
     logging.info('colocou todo mundo pra trabalhar; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
 
-    pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/close.png', confidence=.8), None, 0.8)
+    pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/close.png', confidence=.8), None, 0.5)
     pyautogui.click()
     logging.debug('saiu da tela de herois; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
 
@@ -166,7 +152,7 @@ def putWork():
             cont = 0
             logging.debug('encontrou o botão pra abrir o mapa; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             time.sleep(1)
-            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/hunt.png', confidence=.8), None, 0.7)
+            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/hunt.png', confidence=.8), None, 0.5)
             pyautogui.click()
             logging.debug('entrou pro mapa; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             timeWork()
@@ -209,7 +195,7 @@ def putRest():
     logging.debug('encontrou o botão rest All e vai colocar pra descansar; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
     cont = 0
     time.sleep(1)
-    pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/restAll.png', confidence=.7), None, 0.6)
+    pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/restAll.png', confidence=.7), None, 0.5)
     pyautogui.click()
     work = False
     while work == False:
@@ -252,7 +238,7 @@ def isError(trabalho=True, minRestantes=81):
 
 def timeWork():
     logging.info('tempo de trabalho; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
-    for x in range(1, 32):
+    for x in range(1, 36):
         locateHunt=False
         locateBack=False
         cont = 0
@@ -262,9 +248,9 @@ def timeWork():
             logging.info('deu mapa completo; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             isComplete()
             logging.info('voltou ao trabalho; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))'''
-        if pyautogui.locateOnScreen('./buttons/unknown.png', confidence=.5) != None:
+        '''if pyautogui.locateOnScreen('./buttons/unknown.png', confidence=.5) != None:
             logging.error('erro detectado na tela; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
-            isError()
+            isError()'''
         if x % 5 == 0:
             logging.debug('resetando mapa para evitar hero bugado; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             while locateBack==False:
@@ -272,7 +258,7 @@ def timeWork():
                 cont += 1
                 if pyautogui.locateOnScreen('./buttons/back.png', confidence=.8) != None:
                     locateBack = True
-                    pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/back.png', confidence=.8), None, 0.9)
+                    pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/back.png', confidence=.8), None, 0.5)
                     pyautogui.click()
                     time.sleep(1)
                     logging.debug('mapa fechado; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
@@ -282,7 +268,7 @@ def timeWork():
                         cont += 1
                         if pyautogui.locateOnScreen('./buttons/hunt.png', confidence=.8) != None:
                             locateHunt = True
-                            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/hunt.png', confidence=.8), None, 0.9)
+                            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/hunt.png', confidence=.8), None, 0.5)
                             pyautogui.click()
                             time.sleep(1)
                             logging.debug('voltando ao mapa; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
@@ -301,7 +287,7 @@ def timeWork():
         cont += 1
         if pyautogui.locateOnScreen('./buttons/back.png', confidence=.8) != None:
             locateBack = True
-            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/back.png', confidence=.8), None, 0.7)
+            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/back.png', confidence=.8), None, 0.5)
             pyautogui.click()
             logging.debug('mapa fechado; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             time.sleep(1)
@@ -310,7 +296,7 @@ def timeWork():
             logging.error('nao encontrou o botão para sair do mapa em 1 min e vai recarregar; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             recarregar(False)
 
-def timeRest(continua=False, minRestantes=81):
+def timeRest(continua=False, minRestantes=76):
     logging.info('tempo de descanso; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
     if continua==True:
         logging.debug('continuando tempo de descanso apos erro; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
@@ -330,7 +316,7 @@ def timeRest(continua=False, minRestantes=81):
         cont += 1
         if pyautogui.locateOnScreen('./buttons/close.png', confidence=.8) != None:
             close = True
-            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/close.png', confidence=.8), None, 0.8)
+            pyautogui.moveTo(pyautogui.locateOnScreen('./buttons/close.png', confidence=.8), None, 0.5)
             pyautogui.click()
             logging.debug('fechou a tela de herois; '+str(datetime.now().strftime("%H:%M:%S, %d/%m/%Y")))
             time.sleep(1)
